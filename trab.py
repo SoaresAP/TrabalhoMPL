@@ -2,7 +2,6 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-#%matplotlib inline
 
 #Função do cáculo da sigmóide
 def sigmoid(x):
@@ -29,19 +28,22 @@ plt.show()
 sns.set_style('whitegrid')
 sns.countplot(x='Delta',hue='Output1',data=DataSet,palette='rainbow')
 plt.show()
-#X = DataSet[[ 'NumAmostra', 'Area', 'Delta']]
-#y = DataSet[['Output1','Output2']]
+
 sns.pairplot(DataSet)
 plt.show()
 sns.heatmap(DataSet.corr())
 plt.show()
+
 from sklearn.preprocessing import StandardScaler
 scaler=StandardScaler()
+
 DataScaled=scaler.fit_transform(DataSet)
 DataSetScaled=pd.DataFrame(np.array(DataScaled),columns = ['Referencia', 'NumAmostra', 'Area', 'Delta', 'Output1','Output2'])
 DataSetScaled.head()
+
 X = DataSetScaled.drop(['Output1', 'Output2'],axis=1)
 y = DataSet[['Output1','Output2']]
+
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=101)
 
